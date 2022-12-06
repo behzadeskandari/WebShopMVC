@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Products>
+
+
+  @{
+    ViewData["Title"] = "Index";
+  }
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Product  List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info">&nbsp; New Product Type</a>
+    </div>
+
+</div>
+
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(x => x.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.ProductTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.SpecialTags)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => item.Price)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => item.Available)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => item.ProductTypes.Name)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => item.SpecialTags.Name)
+                </td>
+
+                <td class="col-md-6">
+                    @*EDIT | DELETE | UPDATE*@
+                    @*<partial name="_TableButtonPartial" model="@item.Id"/>*@
+                    <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id"  class="btn btn-primary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id"  class="btn btn-primary">Delelte</a>
+                  
+                </td>
+            </tr>
+        }
+    </table>
+</div>

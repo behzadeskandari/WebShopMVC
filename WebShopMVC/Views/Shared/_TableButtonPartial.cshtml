@@ -1,0 +1,23 @@
+﻿@model int
+@{
+}
+
+
+<td style="width: 150px">
+    <div class="btn-group" role="group">
+        @*<a class="btn btn-primary" href="@Url.Action("Edit/"+ Model)" >
+            Edit
+            <i class="fas fa-edit"></i>
+        </a>*@
+
+        <a asp-action="Edit" asp-route-id="Model"  class="btn btn-primary">Edit</a>
+        <a asp-action="Details" asp-route-id="Model"  class="btn btn-primary">Details</a>
+               
+        @*<a class="btn btn-primary" href="@Url.Action("Details/"+ Model)" >Details</a>*@
+        @*<a asp-action="Details+Model" class="btn btn-primary">Back To Details</a>*@
+           
+        @*<a class="btn btn-primary" href="@Url.Action("Delete/"+ Model)" >Delete</a>*@
+   
+        <a asp-action="Delete" asp-route-id="Model"  class="btn btn-primary">Delelte</a>
+    </div>
+</td>
