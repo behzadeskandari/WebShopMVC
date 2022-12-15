@@ -31,13 +31,24 @@ namespace WebShopMVC
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddDefaultUI()
+               .AddDefaultTokenProviders();
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
 
 
+
             services.AddMvc(x => x.EnableEndpointRouting = false);
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+            });
             //MvcOptions compatibilitySwitches = new MvcOptions();
             //compatibilitySwitches.EnableEndpointRouting = false;
         }
@@ -71,6 +82,8 @@ namespace WebShopMVC
             //        pattern: "{controller=Home}/{action=Index}/{id?}");
             //    endpoints.MapRazorPages();
             //});
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

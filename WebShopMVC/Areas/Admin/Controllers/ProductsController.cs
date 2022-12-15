@@ -39,7 +39,7 @@ namespace WebShopMVC.Controllers
             return View(await products.ToListAsync());
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View(productsVM);
         }

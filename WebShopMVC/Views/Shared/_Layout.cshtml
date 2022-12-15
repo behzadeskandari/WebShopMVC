@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using WebShopMVC.Extensions;
+@using WebShopMVC.Utility;
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,7 +13,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/FontAwesome/css/fontawesome.css" />
-    
+    <link rel="stylesheet" href="~/css/jquery-ui.css"/>
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css"/>
+
 </head>
 <body>
     <header>
@@ -36,6 +44,31 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if(HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
+                        {
+                            <li style="color:white;">
+                                <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                                    <i class="fas fa-shopping-cart">
+                                        &nbsp;
+                                        @{
+                                            var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
+
+                                        }
+                                        (@count)
+                                    </i>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="color:white;">
+                                <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                                    <i class="fas fa-shopping-cart">
+                                        &nbsp; (0)
+                                    </i>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -55,6 +88,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery-ui.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.timepicker.js" asp-append-version="true"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

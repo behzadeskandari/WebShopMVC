@@ -1,0 +1,17 @@
+﻿@model WebShopMVC.Models.ViewModel.ShoppingCartViewModel
+
+
+
+<h2 class="text-info">
+Appoinment Confirmation
+</h2>
+
+<div class="form-text">
+    Your appoinment has been submited. one of our awesome sales rep would be in touch shortly
+</div>
+
+<partial name="~/Views/Shared/_AppoinmentProductDetails.cshtml" model="Model.Products"/>
+<partial name="~/Views/Shared/_AppoinmentCustomerDetails.cshtml" model="Model.Appointments"/>
+
+
+<a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-success"> Back To Products</a>
